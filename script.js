@@ -31,8 +31,6 @@ function checkEmail(input) {
 	}
 }
 
-// Check required fields by using Array method, forEach that take function
-
 // function checkRequired(inputArr) {
 // 	inputArr.forEach(function(input) {
 // 		if (input.value.trim() === '') {
@@ -69,6 +67,13 @@ function checkLength(input, min, max) {
 	}
 }
 
+// check password match
+function checkPasswordsMatch(input1, input2) {
+	if (input1.value !== input2.value) {
+		showError(input2, 'Password do not match');
+	}
+}
+
 // get the fist letter use charAt(position of item), slice(from position)
 // username.charAt(0) will get u.toUppercase = U
 //username.slice(1)  will start  slice from 2nd position sername
@@ -83,9 +88,10 @@ function getFieldName(input) {
 
 form.addEventListener('submit', function(e) {
 	e.preventDefault();
-
+	//    checkRequired takes an array of inputs
 	checkRequired([ username, email, password, password2 ]);
 	checkLength(username, 3, 15);
 	checkLength(password, 6, 25);
 	checkEmail(email);
+	checkPasswordsMatch(password, password2);
 });
