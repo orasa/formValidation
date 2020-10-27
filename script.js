@@ -26,28 +26,43 @@ function isValidEmail(email) {
 	return re.test(String(email).toLowerCase());
 }
 
+// Check required fields by using Array method, forEach that take function
+
+// function checkRequired(inputArr) {
+// 	inputArr.forEach(function(input) {
+// 		if (input.value.trim() === '') {
+// 			showError(input, `${input.id} is required`);
+// 		} else {
+// 			showSuccess(input);
+// 		}
+// 	});
+
+// to capitalized the first letter create getFieldName function
+
+function checkRequired(inputArr) {
+	inputArr.forEach(function(input) {
+		if (input.value.trim() === '') {
+			showError(input, `${getFieldName(input)} is required`);
+		} else {
+			showSuccess(input);
+		}
+	});
+}
+
+// get the fist letter use charAt(position of item), slice(from position)
+// username.charAt(0) will get u.toUppercase = U
+//username.slice(1)  will start  slice from 2nd position sername
+//concat together U + sername
+
+function getFieldName(input) {
+	return input.id.charAt(0).toUpperCase() + input.id.slice(1);
+}
+
 // Ad event listennig upon submit of the form
+// use function CheckRequired which take array of input
 
 form.addEventListener('submit', function(e) {
 	e.preventDefault();
 
-	if (username.value === '') {
-		showError(username, 'Username is required');
-	} else {
-		showSuccess(username);
-	}
-
-	if (email.value === '') {
-		showError(email, 'Email is required');
-	} else if (!isValidEmail(email.value)) {
-		showError(email, 'Email is invalid');
-	} else {
-		showSuccess(email);
-	}
-
-	if (password.value === '') {
-		showError(password, 'Password is required');
-	} else {
-		showSuccess(password);
-	}
+	checkRequired([ username, email, password, password2 ]);
 });
