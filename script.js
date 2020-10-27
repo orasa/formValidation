@@ -49,6 +49,20 @@ function checkRequired(inputArr) {
 	});
 }
 
+function checkLength(input, min, max) {
+	if (input.value.length < min) {
+		showError(
+			input,
+			`${getFieldName(input)} must be at least ${min} characters`
+		);
+	} else if (input.value.length > max) {
+		showError(
+			input,
+			`${getFieldName(input)} must be less than ${max} characters`
+		);
+	}
+}
+
 // get the fist letter use charAt(position of item), slice(from position)
 // username.charAt(0) will get u.toUppercase = U
 //username.slice(1)  will start  slice from 2nd position sername
@@ -65,4 +79,6 @@ form.addEventListener('submit', function(e) {
 	e.preventDefault();
 
 	checkRequired([ username, email, password, password2 ]);
+	checkLength(username, 3, 15);
+	checkLength(password, 6, 25);
 });
