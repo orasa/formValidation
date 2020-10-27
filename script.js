@@ -1,4 +1,4 @@
-// get all dom element by id
+// get all dom elements by id
 const form = document.getElementById('form');
 const username = document.getElementById('username');
 const email = document.getElementById('email');
