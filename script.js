@@ -20,10 +20,15 @@ function showSuccess(input) {
 	formControl.className = 'form-control success';
 }
 
-//  Check email is valid with regular expression
-function isValidEmail(email) {
+// change to checkEmail function
+function checkEmail(input) {
 	const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-	return re.test(String(email).toLowerCase());
+	//  if the input value matchs regex then show success
+	if (re.test(input.value.trim())) {
+		showSuccess(input);
+	} else {
+		showError(input, 'Email is not valid');
+	}
 }
 
 // Check required fields by using Array method, forEach that take function
@@ -49,6 +54,7 @@ function checkRequired(inputArr) {
 	});
 }
 
+//check the length of input
 function checkLength(input, min, max) {
 	if (input.value.length < min) {
 		showError(
@@ -81,4 +87,5 @@ form.addEventListener('submit', function(e) {
 	checkRequired([ username, email, password, password2 ]);
 	checkLength(username, 3, 15);
 	checkLength(password, 6, 25);
+	checkEmail(email);
 });
